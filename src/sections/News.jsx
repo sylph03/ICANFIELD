@@ -121,7 +121,12 @@ const News = () => {
           <div className="max-sm:hidden absolute inset-0 rounded-[1.25rem] bg-[linear-gradient(90deg,rgba(63,34,20,0.00)_59.16%,rgba(65,33,18,0.28)_70.87%,rgba(66,32,16,0.55)84.12%,#200D05_102.35%)]"></div>
           <div className="absolute inset-0 rounded-[1.25rem] bg-[linear-gradient(183deg,rgba(63,34,20,0.00)10.25%,#000_119.74%)]"></div>
 
-          <div className="absolute bottom-[1.5rem] max-sm:bottom-[1.25rem] left-[4.54rem] max-sm:left-[1.5rem] flex w-[57.10388rem] flex-col items-start gap-[1.34494rem] max-sm:gap-[1rem] shrink-0">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="absolute bottom-[1.5rem] max-sm:bottom-[1.25rem] left-[4.54rem] max-sm:left-[1.5rem] flex w-[57.10388rem] flex-col items-start gap-[1.34494rem] max-sm:gap-[1rem] shrink-0">
             <div className="flex items-center gap-[1.34494rem]">
               <div className="flex px-[0.6725rem] items-center rounded-[0.33625rem] bg-white text-[#5C321E] font-Inter text-[0.78456rem] max-sm:text-[0.625rem] not-italic font-medium leading-[1.37181rem] tracking-[-0.02019rem]">
                 Sự kiện nổi bật
@@ -146,7 +151,7 @@ const News = () => {
                 <path d="M7.625 12.0381H17.625M17.625 12.0381L13.625 8.03809M17.625 12.0381L13.625 16.0381" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
-          </div>
+          </motion.div>
 
           {/* <div className='max-sm:hidden w-[18.3rem] h-[20rem] absolute top-[5.62rem] right-[5.22rem] flex flex-col items-start justify-center gap-[3rem]'>
             {featuredNews.map((item, index) => (
@@ -278,14 +283,16 @@ const News = () => {
                 <img className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 ease-in-out group-hover:scale-110 rounded-[1rem]" src={item.image} />
                 <div className="relative z-1 w-full h-full rounded-[1rem] flex p-[2rem] max-sm:p-[1.5rem] flex-col justify-between items-start flex-grow flex-shrink-0 basis-0 self-stretch bg-[linear-gradient(180deg,rgba(0,0,0,0.00)22.87%,rgba(0,0,0,0.57)63.62%,rgba(0,0,0,0.84)89.8%)]">
 
-                  <button className="max-sm:opacity-0 flex justify-end items-start self-stretch">
+                  <button className="relative max-sm:opacity-0 flex justify-end items-start self-stretch transition-all duration-500 ease-in-out">
                     <div initial="rest" whileHover="hover" className="flex p-[0.625rem] gap-[0.625rem] shrink-0 rounded-[0.9375rem] bg-white">
-                      <span className="hidden group-hover:flex transition-all duration-500 pl-[0.625rem] flex-grow flex-shrink-0 basis-0 text-[#3F2214] font-Inter text-[0.875rem] not-italic font-semibold leading-[1.3125rem]">
+                      <span className="absolute top-1/2 -translate-y-1/2 right-[3rem] opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 text-center whitespace-nowrap pl-[0.625rem] flex-grow flex-shrink-0 basis-0 text-[#3F2214] font-Inter text-[0.875rem] not-italic font-semibold leading-[1.3125rem]">
                         Xem thêm
                       </span>
-                      <svg className="group-hover:rotate-45 transition-all duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M7.04928 16.9497L16.9488 7.05025M16.9488 7.05025H8.46349M16.9488 7.05025V15.5355" stroke="#3F2214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
+                      <div className="w-6 group-hover:w-[7.5rem] flex justify-end items-center transition-all duration-500 ease-in-out">
+                        <svg className="group-hover:rotate-45 transition-all duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <path d="M7.04928 16.9497L16.9488 7.05025M16.9488 7.05025H8.46349M16.9488 7.05025V15.5355" stroke="#3F2214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </div>
                     </div>
                   </button>
 

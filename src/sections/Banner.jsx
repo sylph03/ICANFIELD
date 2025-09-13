@@ -1,4 +1,26 @@
+import gsap from 'gsap'
+import { useEffect } from 'react'
+
 const Banner = () => {
+
+  useEffect(() => {
+    gsap.fromTo(
+      '.fade-in-banner',
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: '.fade-in-banner',
+          start: "top center",
+        },
+      }
+    )
+  }, [])
+
   return (
     <div className="w-full aspect-[100.1875/29.875] max-sm:aspect-[23/25] bg-[url(/bg-banner.png)] bg-cover bg-center bg-no-repeat relative">
       <div className="absolute inset-0 bg-[rgba(0,0,0,0.30)]"></div>
@@ -27,10 +49,10 @@ const Banner = () => {
         </svg>
         <div className="flex max-sm:flex-col items-start gap-[5rem] max-sm:gap-[1rem] self-stretch">
           <div className="flex flex-col items-start gap-[0.25rem]">
-            <p className="text-white font-Optima text-[5rem] max-sm:text-[2.375rem] not-italic font-medium leading-[6rem] max-sm:leading-[2.85rem] tracking-[-0.1rem] max-sm:tracking-[-0.0475rem]">
+            <p className="fade-in-banner text-white font-Optima text-[5rem] max-sm:text-[2.375rem] not-italic font-medium leading-[6rem] max-sm:leading-[2.85rem] tracking-[-0.1rem] max-sm:tracking-[-0.0475rem]">
               SỰ KIỆN ICANFIELD
             </p>
-            <p className="text-white font-Optima text-[3.25rem] max-sm:text-[1.75rem] not-italic font-medium leading-[3.9rem] max-sm:leading-[2.275rem] tracking-[-0.065rem] max-sm:tracking-[-0.035rem]">
+            <p className="fade-in-banner text-white font-Optima text-[3.25rem] max-sm:text-[1.75rem] not-italic font-medium leading-[3.9rem] max-sm:leading-[2.275rem] tracking-[-0.065rem] max-sm:tracking-[-0.035rem]">
               Dòng Chảy Tin Tức
             </p>
           </div>
@@ -44,7 +66,7 @@ const Banner = () => {
             </defs>
           </svg>
           <div className="flex py-[0.75rem] justify-center items-center gap-[0.625rem]">
-            <p className="w-[20.1875rem] text-[rgba(255,255,255,0.85)] font-Inter text-[1rem] max-sm:text-[0.75rem] not-italic font-semibold leading-[1.5rem] max-sm:leading-[1.125rem] uppercase">
+            <p className="fade-in-banner w-[20.1875rem] text-[rgba(255,255,255,0.85)] font-Inter text-[1rem] max-sm:text-[0.75rem] not-italic font-semibold leading-[1.5rem] max-sm:leading-[1.125rem] uppercase">
               Khám phá những chia sẻ giá trị, kinh nghiệm thực tiễn và thông tin hữu ích với iCanfield.
             </p>
           </div>
