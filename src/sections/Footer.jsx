@@ -78,7 +78,7 @@ const Footer = () => {
               </div>
 
               {/* mb */}
-              <div className="max-sm:w-full flex flex-col items-start gap-[2rem] max-sm:gap-[1.5rem]">
+              <div className="max-sm:w-full hidden max-sm:flex flex-col items-start gap-[2rem] max-sm:gap-[1.5rem]">
                 <p className="text-white font-Inter text-[1rem] not-italic font-medium leading-[1.5rem ]">
                   MENU
                 </p>
