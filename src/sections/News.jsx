@@ -4,20 +4,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Pagination from "@/components/pagination"
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "framer-motion"
 
 const featuredNews = [
   {
     id: 1,
+    img: '/bg-featurednews.png',
     text: 'Khám phá các quốc gia có chính sách định cư tay nghề tốt nhất, cơ hội phát triển sự nghiệp.'
   },
   {
     id: 2,
+    img: '/bg-featurednews-1.jpg',
     text: 'Khám phá các quốc gia có chính sách định cư tay nghề tốt nhất, cơ hội phát triển sự nghiệp.'
   },
   {
     id: 3,
+    img: '/bg-featurednews.png',
     text: 'Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024'
   }
 ]
@@ -67,6 +72,8 @@ const repeatedNews = Array.from({ length: 10 }).flatMap(() => otherNews);
 const News = () => {
   const [newsActive, setNewsActive] = useState(0)
   const [activeTab, setActiveTab] = useState(0);
+  const [itemHeight, setItemHeight] = useState(0)
+  const itemRef = useRef(null)
 
   const [page, setPage] = useState(1)
   const itemsPerPage = 9
@@ -74,6 +81,13 @@ const News = () => {
   const startIndex = (page - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
   const currentData = repeatedNews.slice(startIndex, endIndex)
+
+  useEffect(() => {
+    if (itemRef.current) {
+      const height = itemRef.current.offsetHeight
+      setItemHeight(height)
+    }
+  }, [])
 
   function prev() {
     if (newsActive <= 0) return
@@ -92,7 +106,18 @@ const News = () => {
         <h1 className="text-[#3F2214] text-[3rem] max-sm:text-[1.5rem] font-Optima not-italic font-semibold leading-[3.6rem] max-sm:leading-[1.95rem] tracking-[-0.06rem] max-sm:[-0.045rem]">
           Tin nổi bật
         </h1>
-        <div className="relative w-full h-[34.63219rem] bg-[url(/bg-featurednews.png)] rounded-[1.25rem] bg-cover bg-no-repeat bg-center">
+        <div className="relative w-full aspect-[89.66263/34.63219] max-sm:aspect-[21.4375/34.625] rounded-[1.25rem] bg-cover bg-no-repeat bg-center">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={featuredNews[newsActive].img}
+              src={featuredNews[newsActive].img}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full rounded-[1.25rem] object-center object-cover"
+            />
+          </AnimatePresence>
           <div className="max-sm:hidden absolute inset-0 rounded-[1.25rem] bg-[linear-gradient(90deg,rgba(63,34,20,0.00)_59.16%,rgba(65,33,18,0.28)_70.87%,rgba(66,32,16,0.55)84.12%,#200D05_102.35%)]"></div>
           <div className="absolute inset-0 rounded-[1.25rem] bg-[linear-gradient(183deg,rgba(63,34,20,0.00)10.25%,#000_119.74%)]"></div>
 
@@ -123,7 +148,7 @@ const News = () => {
             </button>
           </div>
 
-          <div className='max-sm:hidden w-[18.3rem] h-[20rem] absolute top-[5.62rem] right-[5.22rem] flex flex-col items-start justify-center gap-[3rem]'>
+          {/* <div className='max-sm:hidden w-[18.3rem] h-[20rem] absolute top-[5.62rem] right-[5.22rem] flex flex-col items-start justify-center gap-[3rem]'>
             {featuredNews.map((item, index) => (
               <div key={index} className='flex flex-col items-start w-[17.26006rem] gap-[0.22419rem]'>
                 <p className={`${newsActive === index ? 'text-white' : 'text-[rgba(255,255,255,0.34)]'} text-[0.78456rem] font-Lexend not-italic font-semibold leading-[1.01994rem] tracking-[0.05606rem] uppercase`}>
@@ -133,9 +158,33 @@ const News = () => {
                   {item.text}
                 </p>
               </div>
-            ))}
+            ))} */}
+          <div className='max-sm:hidden w-[18.3rem] h-[21rem] absolute top-1/2 -translate-y-1/2 right-[5.22rem] flex flex-col items-start justify-center gap-[3rem] overflow-hidden'>
+            <div
+              className='flex flex-col items-start gap-[3rem] transition-transform duration-500 ease-in-out'
+              style={{
+                transform: `translateY(calc(50% - ${(newsActive * (itemHeight + 48)) + (itemHeight / 2)}px))`
+              }}
+            >
+              {featuredNews.map((item, index) => (
+                <div
+                  key={index}
+                  ref={index === 0 ? itemRef : null}
+                  onClick={() => newsActive !== index && setNewsActive(index)}
+                  className='flex flex-col items-start w-[17.26006rem] gap-[0.22419rem] cursor-pointer transition-opacity duration-200'
+                >
+                  <p className={`${newsActive === index ? 'text-white' : 'text-[rgba(255,255,255,0.34)]'} text-[0.78456rem] font-Lexend not-italic font-semibold leading-[1.01994rem] tracking-[0.05606rem] uppercase`}>
+                    {String(item.id).padStart(2, '0')}
+                  </p>
+                  <p className={`${newsActive === index ? 'opacity-100' : 'opacity-[0.34]'} text-white text-[0.96869rem] font-Inter not-italic font-medium leading-[1.28469rem]`}>
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className='max-sm:hidden absolute top-[9.44rem] right-[1.48rem] flex w-[3rem] h-[12.0625rem] flex-col justify-between items-center shrink-0'>
+
+          <div className='max-sm:hidden absolute top-1/2 -translate-y-1/2 right-[1.48rem] flex w-[3rem] h-[12.0625rem] flex-col justify-between items-center shrink-0'>
             <button onClick={prev} className='flex w-[2.75rem] h-[2.75rem] py-[0.59581rem] px-[0.6875rem] justify-center items-center shrink-0 rounded-[1.375rem] bg-[rgba(220,220,220,0.00)]'>
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
                 <path d="M11.5586 8.44098L18.4766 14.7359C18.6198 14.8648 18.6914 15.0295 18.6914 15.23C18.6914 15.4306 18.6198 15.5953 18.4766 15.7242C18.319 15.8674 18.1328 15.939 17.918 15.939C17.7031 15.939 17.5241 15.8674 17.3809 15.7242L11 9.94489L4.61914 15.7242C4.47591 15.8674 4.29687 15.939 4.08203 15.939C3.86719 15.939 3.68099 15.8674 3.52344 15.7242C3.38021 15.5953 3.30859 15.4306 3.30859 15.23C3.30859 15.0295 3.38021 14.8648 3.52344 14.7359L10.4414 8.44098C10.599 8.29775 10.7852 8.22614 11 8.22614C11.2148 8.22614 11.401 8.29775 11.5586 8.44098Z" fill="white" fill-opacity="0.7" />
@@ -226,12 +275,12 @@ const News = () => {
           <div className="w-full grid grid-cols-3 max-sm:grid-cols-1 gap-y-[4.5rem] max-sm:gap-y-[1.5rem] gap-x-[1.88rem]">
             {currentData.map((item, index) => (
               <div key={index} className="group w-full aspect-[23/26] rounded-[1rem] relative overflow-hidden">
-                <img className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 ease-in-out group-hover:scale-110" src={item.image} />
+                <img className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 ease-in-out group-hover:scale-110 rounded-[1rem]" src={item.image} />
                 <div className="relative z-1 w-full h-full rounded-[1rem] flex p-[2rem] max-sm:p-[1.5rem] flex-col justify-between items-start flex-grow flex-shrink-0 basis-0 self-stretch bg-[linear-gradient(180deg,rgba(0,0,0,0.00)22.87%,rgba(0,0,0,0.57)63.62%,rgba(0,0,0,0.84)89.8%)]">
 
                   <div className="max-sm:opacity-0 flex justify-end items-start self-stretch">
-                    <div className="flex p-[0.625rem] gap-[0.625rem] shrink-0 rounded-[0.9375rem] bg-white">
-                      <span className="hidden group-hover:inline-block transition-all duration-500 ease-in-out pl-[0.625rem] flex-grow flex-shrink-0 basis-0 text-[#3F2214] font-Inter text-[0.875rem] not-italic font-semibold leading-[1.3125rem]">
+                    <div initial="rest" whileHover="hover" className="flex p-[0.625rem] gap-[0.625rem] shrink-0 rounded-[0.9375rem] bg-white">
+                      <span className="hidden group-hover:flex transition-all duration-500 pl-[0.625rem] flex-grow flex-shrink-0 basis-0 text-[#3F2214] font-Inter text-[0.875rem] not-italic font-semibold leading-[1.3125rem]">
                         Xem thêm
                       </span>
                       <svg className="group-hover:rotate-45 transition-all duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
