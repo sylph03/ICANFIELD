@@ -1,4 +1,11 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { useState } from "react"
+import Pagination from "@/components/pagination"
 
 const featuredNews = [
   {
@@ -22,16 +29,51 @@ const tabs = [
   'Câu chuyện thành công',
 ];
 
-const otherNews = Array(9).fill(null).map(() => ({
-  categories: 'TIN TỨC DU HỌC',
-  image: '/other-news-item.jpg',
-  title: 'Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024',
-  date: '23/10/2024'
-}));
+const otherNews = [
+  {
+    categories: 'TIN TỨC DU HỌC',
+    image: '/other-news-item1.png',
+    title: 'Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024',
+    date: '23/10/2024'
+  },
+  {
+    categories: 'TIN TỨC DU HỌC',
+    image: '/other-news-item2.png',
+    title: 'Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024',
+    date: '23/10/2024'
+  },
+  {
+    categories: 'TIN TỨC DU HỌC',
+    image: '/other-news-item3.png',
+    title: 'Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024',
+    date: '23/10/2024'
+  },
+  {
+    categories: 'TIN TỨC DU HỌC',
+    image: '/other-news-item4.png',
+    title: 'Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024',
+    date: '23/10/2024'
+  },
+  {
+    categories: 'TIN TỨC DU HỌC',
+    image: '/other-news-item5.png',
+    title: 'Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024',
+    date: '23/10/2024'
+  },
+]
+
+const repeatedNews = Array.from({ length: 10 }).flatMap(() => otherNews);
 
 const News = () => {
   const [newsActive, setNewsActive] = useState(0)
   const [activeTab, setActiveTab] = useState(0);
+
+  const [page, setPage] = useState(1)
+  const itemsPerPage = 9
+
+  const startIndex = (page - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentData = repeatedNews.slice(startIndex, endIndex)
 
   function prev() {
     if (newsActive <= 0) return
@@ -94,22 +136,22 @@ const News = () => {
             ))}
           </div>
           <div className='max-sm:hidden absolute top-[9.44rem] right-[1.48rem] flex w-[3rem] h-[12.0625rem] flex-col justify-between items-center shrink-0'>
-            <div onClick={prev} className='flex w-[2.75rem] h-[2.75rem] py-[0.59581rem] px-[0.6875rem] justify-center items-center shrink-0 rounded-[1.375rem] bg-[rgba(220,220,220,0.00)]'>
+            <button onClick={prev} className='flex w-[2.75rem] h-[2.75rem] py-[0.59581rem] px-[0.6875rem] justify-center items-center shrink-0 rounded-[1.375rem] bg-[rgba(220,220,220,0.00)]'>
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
                 <path d="M11.5586 8.44098L18.4766 14.7359C18.6198 14.8648 18.6914 15.0295 18.6914 15.23C18.6914 15.4306 18.6198 15.5953 18.4766 15.7242C18.319 15.8674 18.1328 15.939 17.918 15.939C17.7031 15.939 17.5241 15.8674 17.3809 15.7242L11 9.94489L4.61914 15.7242C4.47591 15.8674 4.29687 15.939 4.08203 15.939C3.86719 15.939 3.68099 15.8674 3.52344 15.7242C3.38021 15.5953 3.30859 15.4306 3.30859 15.23C3.30859 15.0295 3.38021 14.8648 3.52344 14.7359L10.4414 8.44098C10.599 8.29775 10.7852 8.22614 11 8.22614C11.2148 8.22614 11.401 8.29775 11.5586 8.44098Z" fill="white" fill-opacity="0.7" />
               </svg>
-            </div>
+            </button>
 
             {featuredNews.map((_, index) => {
               return newsActive === index ? (
-                <svg key={index} xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <svg key={index} className="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
                   <g opacity="0.9">
                     <circle cx="6.61133" cy="6.01941" r="5.6" stroke="white" stroke-width="0.8" />
                     <circle cx="6.61133" cy="6.01941" r="3.6" fill="white" stroke="white" stroke-width="0.8" />
                   </g>
                 </svg>
               ) : (
-                <svg key={index} xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
+                <svg onClick={() => setNewsActive(index)} key={index} className="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
                   <g opacity="0.4">
                     <circle cx="6.61133" cy="5.01941" r="3.73333" stroke="white" stroke-width="0.533333" />
                   </g>
@@ -117,11 +159,11 @@ const News = () => {
               )
             })}
 
-            <div onClick={next} className='flex w-[2.75rem] h-[2.75rem] py-[0.59581rem] px-[0.6875rem] justify-center items-center shrink-0 rounded-[1.375rem] bg-[rgba(220,220,220,0.00)]'>
+            <button onClick={next} className='flex w-[2.75rem] h-[2.75rem] py-[0.59581rem] px-[0.6875rem] justify-center items-center shrink-0 rounded-[1.375rem] bg-[rgba(220,220,220,0.00)]'>
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
                 <path d="M10.4414 14.559L3.52344 8.2641C3.38021 8.13519 3.30859 7.97048 3.30859 7.76996C3.30859 7.56944 3.38021 7.40473 3.52344 7.27582C3.68099 7.13259 3.86719 7.06098 4.08203 7.06098C4.29688 7.06098 4.47591 7.13259 4.61914 7.27582L11 13.0551L17.3809 7.27582C17.5241 7.13259 17.7031 7.06097 17.918 7.06097C18.1328 7.06097 18.319 7.13259 18.4766 7.27582C18.6198 7.40472 18.6914 7.56944 18.6914 7.76996C18.6914 7.97048 18.6198 8.13519 18.4766 8.2641L11.5586 14.559C11.401 14.7023 11.2148 14.7739 11 14.7739C10.7852 14.7739 10.599 14.7023 10.4414 14.559Z" fill="white" fill-opacity="0.7" />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
       </div>
@@ -144,15 +186,31 @@ const News = () => {
             </div>
 
             <div className="flex max-sm:flex-row-reverse items-center gap-[1rem]">
-              <div className="max-sm:w-full flex w-[16.9375rem] py-[0.75rem] pr-[0.5rem] pl-[1rem] items-center gap-[0.5rem] rounded-[0.5rem] bg-[#F3F3F3]">
-                <div className="flex items-center flex-grow flex-shrink-0 basis-0">
-                  <span className="text-[#333] font-Inter text-[1rem] max-sm:text-[0.75rem] not-italic font-medium max-sm:font-bold leading-[1.5rem] max-sm:leading-[1.125rem] tracking-[-0.02rem] max-sm:tracking-[-0.015rem]">Lọc theo:&nbsp;</span>
-                  <span className="text-[#333] font-Inter text-[1rem] max-sm:text-[0.75rem] not-italic font-norma leading-[1.5rem] max-sm:leading-[1.125rem] tracking-[-0.02rem] max-sm:tracking-[-0.015rem]">Tất cả</span>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M16 10L12 14L8 10" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="max-sm:w-full flex w-[16.9375rem] py-[0.75rem] pr-[0.5rem] pl-[1rem] items-center gap-[0.5rem] rounded-[0.5rem] bg-[#F3F3F3]">
+                  <div className="flex items-center flex-grow flex-shrink-0 basis-0">
+                    <span className="text-[#333] font-Inter text-[1rem] max-sm:text-[0.75rem] not-italic font-medium max-sm:font-bold leading-[1.5rem] max-sm:leading-[1.125rem] tracking-[-0.02rem] max-sm:tracking-[-0.015rem]">Lọc theo:&nbsp;</span>
+                    <span className="text-[#333] font-Inter text-[1rem] max-sm:text-[0.75rem] not-italic font-norma leading-[1.5rem] max-sm:leading-[1.125rem] tracking-[-0.02rem] max-sm:tracking-[-0.015rem]">Tất cả</span>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M16 10L12 14L8 10" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="max-sm:w-full w-[16.9375rem] flex p-[0.5rem] flex-col items-start self-stretch rounded-[0.5rem] bg-white shadow-[0_4px_10px_0_rgba(0, 0, 0, 0.20)]">
+                  <DropdownMenuItem className="flex px-[1rem] py-[0.75rem ] items-center gap-[0.5rem] self-stretch border-b border-b-[rgba(0,0,0,0.10)] bg-white">
+                    <p className="font-Inter text-[1rem] not-italic font-normal leading-[1.5rem] tracking-[-0.02rem]">Input</p>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex px-[1rem] py-[0.75rem ] items-center gap-[0.5rem] self-stretch border-b border-b-[rgba(0,0,0,0.10)] bg-white">
+                    <p className="font-Inter text-[1rem] not-italic font-normal leading-[1.5rem] tracking-[-0.02rem]">Input</p>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex px-[1rem] py-[0.75rem ] items-center gap-[0.5rem] self-stretch border-b border-b-[rgba(0,0,0,0.10)] bg-white">
+                    <p className="font-Inter text-[1rem] not-italic font-normal leading-[1.5rem] tracking-[-0.02rem]">Input</p>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex px-[1rem] py-[0.75rem ] items-center gap-[0.5rem] self-stretch border-b border-b-[rgba(0,0,0,0.10)] bg-white">
+                    <p className="font-Inter text-[1rem] not-italic font-normal leading-[1.5rem] tracking-[-0.02rem]">Input</p>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
               <div className="max-sm:w-full flex w-[16.9375rem] py-[0.75rem] pr-[0.5rem] pl-[1rem] items-center gap-[0.5rem] rounded-[0.5rem] bg-[#F3F3F3]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -166,11 +224,11 @@ const News = () => {
         <div className="w-full flex flex-col gap-[1.38rem] items-center">
           {/* List news */}
           <div className="w-full grid grid-cols-3 max-sm:grid-cols-1 gap-y-[4.5rem] max-sm:gap-y-[1.5rem] gap-x-[1.88rem]">
-            {otherNews.map((item, index) => (
+            {currentData.map((item, index) => (
               <div key={index} className="group w-full aspect-[23/26] rounded-[1rem] relative overflow-hidden">
-                <img className="absolute inset-0 object-cover object-center transition-all duration-500 ease-in-out group-hover:scale-110" src="/other-news-item.jpg"/>
+                <img className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 ease-in-out group-hover:scale-110" src={item.image} />
                 <div className="relative z-1 w-full h-full rounded-[1rem] flex p-[2rem] max-sm:p-[1.5rem] flex-col justify-between items-start flex-grow flex-shrink-0 basis-0 self-stretch bg-[linear-gradient(180deg,rgba(0,0,0,0.00)22.87%,rgba(0,0,0,0.57)63.62%,rgba(0,0,0,0.84)89.8%)]">
-                  
+
                   <div className="max-sm:opacity-0 flex justify-end items-start self-stretch">
                     <div className="flex p-[0.625rem] gap-[0.625rem] shrink-0 rounded-[0.9375rem] bg-white">
                       <span className="hidden group-hover:inline-block transition-all duration-500 ease-in-out pl-[0.625rem] flex-grow flex-shrink-0 basis-0 text-[#3F2214] font-Inter text-[0.875rem] not-italic font-semibold leading-[1.3125rem]">
@@ -184,17 +242,17 @@ const News = () => {
 
                   <div className="flex w-[24.75rem] max-sm:w-auto flex-col items-start gap-[0.6875rem] max-sm:gap-[0.75rem]">
                     <div className="px-[0.75rem] max-sm:px-[0.628rem] py-[0.375rem] max-sm:py-[0.314rem] rounded-[0.375rem] max-sm:rounded-[0.314rem] bg-[rgba(248,244,241,0.48)] backdrop-blur-[15px] max-sm:backdrop-blur-[12px] text-white font-Inter text-[0.75rem] max-sm:text-[0.625rem] not-italic font-bold leading-[1.125rem] max-sm:leading-[0.9375rem] uppercase">
-                      TIN TỨC DU HỌC
+                      {item.categories}
                     </div>
                     <div className="w-[23.24119rem] max-sm:w-[18.4375rem] self-stretch shrink-0 text-white font-Optima text-[1.25rem] max-sm:text-[0.875rem] not-italic max-sm:font-semibold leading-[1.875rem] max-sm:leading-[1.3125rem] tracking-[-0.025rem]">
-                      Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024
+                      {item.title}
                     </div>
                     <div className="flex items-center justify-start gap-[0.38175rem] self-stretch">
                       <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                         <path d="M2.71484 5.7856H13.5731M2.71484 5.7856V11.7578C2.71484 12.5179 2.71484 12.8978 2.86278 13.1882C2.99291 13.4435 3.20039 13.6514 3.45578 13.7815C3.74584 13.9293 4.12574 13.9293 4.8844 13.9293H11.4036C12.1622 13.9293 12.5416 13.9293 12.8316 13.7815C13.087 13.6514 13.2952 13.4435 13.4253 13.1882C13.5731 12.8981 13.5731 12.5187 13.5731 11.7601V5.7856M2.71484 5.7856V5.24282C2.71484 4.48267 2.71484 4.10231 2.86278 3.81197C2.99291 3.55658 3.20039 3.34909 3.45578 3.21897C3.74612 3.07103 4.12648 3.07103 4.88663 3.07103H5.42941M13.5731 5.7856V5.24059C13.5731 4.48192 13.5731 4.10203 13.4253 3.81197C13.2952 3.55658 13.087 3.34909 12.8316 3.21897C12.5413 3.07103 12.1618 3.07103 11.4016 3.07103H10.8586M10.8586 1.71375V3.07103M10.8586 3.07103H5.42941M5.42941 1.71375V3.07103" stroke="#C0C0C0" stroke-width="1.52695" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
                       <span className="text-[#C0C0C0] text-right font-Inter text-[0.875rem] max-sm:[0.75rem] not-italic font-normal leading-[1.3125rem] max-sm:leading-[1.125rem] tracking-[-0.00875rem] max-sm:tracking-normal">
-                        23/10/2024
+                        {item.date}
                       </span>
                     </div>
                   </div>
@@ -203,40 +261,16 @@ const News = () => {
             ))}
           </div>
           {/* Pagination */}
-          <div className="inline-flex items-center gap-[1.5rem] max-sm:gap-[1rem]">
-
-            <button className="flex py-[0.61831rem] px-[0.53588rem] justify-center items-center rounded-[1.23656rem] border-[0.8px] border-transparent hover:border-[#EBEBEB]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-                <path d="M7.68254 9.4975L13.3438 3.27594C13.4597 3.14713 13.6078 3.08273 13.7882 3.08273C13.9685 3.08273 14.1166 3.14713 14.2326 3.27594C14.3614 3.41763 14.4258 3.58509 14.4258 3.7783C14.4258 3.97152 14.3614 4.13253 14.2326 4.26134L9.03505 9.99986L14.2326 15.7384C14.3614 15.8672 14.4258 16.0282 14.4258 16.2214C14.4258 16.4146 14.3614 16.5821 14.2326 16.7238C14.1166 16.8526 13.9685 16.917 13.7882 16.917C13.6078 16.917 13.4597 16.8526 13.3438 16.7238L7.68254 10.5022C7.55373 10.3605 7.48933 10.1931 7.48933 9.99986C7.48933 9.80664 7.55373 9.63919 7.68254 9.4975Z" fill="#3F2214" />
-              </svg>
-            </button>
-
-            <button className="flex w-[2.5rem] max-sm:w-[2rem] h-[2.5rem] max-sm:h-[2rem] p-[0.75rem] items-center justify-center rounded-[0.75rem] border max-sm:border-[0.8px] border-[#CFCECE] bg-[#3F2214]">
-              <span className="text-white font-Inter text-[0.875rem] max-sm:text-[0.7rem] not-italic font-bold leading-[1.3125rem] max-sm:leading-[1.05rem]">1</span>
-            </button>
-            <button className="flex w-[2.5rem] max-sm:w-[2rem] h-[2.5rem] max-sm:h-[2rem] p-[0.75rem] items-center justify-center rounded-[0.75rem] border-[0.8px] max-sm:border-[0.64px] border-[#CFCECE] bg-white">
-              <span className="text-[#3F2214] font-Inter text-[0.875rem] max-sm:text-[0.7rem] not-italic font-bold leading-[1.3125rem] max-sm:leading-[1.05rem]">2</span>
-            </button>
-            <button className="flex w-[2.5rem] max-sm:w-[2rem] h-[2.5rem] max-sm:h-[2rem] p-[0.75rem] items-center justify-center rounded-[0.75rem] border-[0.8px] max-sm:border-[0.64px] border-[#CFCECE] bg-white">
-              <span className="text-[#3F2214] font-Inter text-[0.875rem] max-sm:text-[0.7rem] not-italic font-bold leading-[1.3125rem] max-sm:leading-[1.05rem]">3</span>
-            </button>
-            <button className="flex w-[2.5rem] max-sm:w-[2rem] h-[2.5rem] max-sm:h-[2rem] p-[0.75rem] items-center justify-center rounded-[0.75rem] border-[0.8px] max-sm:border-[0.64px] border-[#CFCECE] bg-white">
-              <span className="text-[#3F2214] font-Inter text-[0.875rem] max-sm:text-[0.7rem] not-italic font-bold leading-[1.3125rem] max-sm:leading-[1.05rem]">4</span>
-            </button>
-            <button className="flex w-[2.5rem] max-sm:w-[2rem] h-[2.5rem] max-sm:h-[2rem] p-[0.75rem] items-center justify-center rounded-[0.75rem] border-[0.8px] max-sm:border-[0.64px] border-[#CFCECE] bg-white">
-              <span className="text-[#3F2214] font-Lexend text-[0.875rem] max-sm:text-[0.7rem] not-italic font-semibold leading-[1.3125rem] max-sm:leading-[1.05rem]">...</span>
-            </button>
-
-            <button className="flex py-[0.61831rem] px-[0.53588rem] justify-center items-center rounded-[1.23656rem] border-[0.8px] border-transparent hover:border-[#EBEBEB]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                <path d="M13.6678 10.5467L7.93905 16.7061C7.82172 16.8337 7.6729 16.8964 7.49257 16.8945C7.31225 16.8925 7.16483 16.8265 7.05031 16.6964C6.92305 16.5533 6.86048 16.3852 6.86258 16.192C6.86469 15.9988 6.93085 15.8385 7.06106 15.7111L12.3208 10.0296L7.18621 4.23473C7.05881 4.10452 6.99617 3.94282 6.99827 3.74961C7.00038 3.55641 7.06661 3.38967 7.19696 3.24939C7.31428 3.12185 7.46311 3.05906 7.64343 3.06103C7.82376 3.063 7.97118 3.12901 8.0857 3.25908L13.6787 9.542C13.806 9.68509 13.8686 9.85324 13.8665 10.0464C13.8644 10.2396 13.7981 10.4064 13.6678 10.5467Z" fill="#3F2214" />
-              </svg>
-            </button>
-          </div>
+          <Pagination
+            totalItems={repeatedNews.length}
+            itemsPerPage={itemsPerPage}
+            currentPage={page}
+            onPageChange={setPage}
+          />
         </div>
       </div>
     </div>
   )
 }
 
-export default  News
+export default News

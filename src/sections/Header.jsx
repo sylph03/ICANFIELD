@@ -28,7 +28,7 @@ const Header = () => {
           <div className="flex gap-[0.94rem] relative h-[2.0625rem]">
             <div className="absolute w-[9.875rem] h-[2.0625rem] shrink-0 bg-[linear-gradient(90deg,#FFF_0%,#FFF_52.5%,#FFF_100%)] opacity-[0.08]">
             </div>
-            <div className="flex items-center justify-center gap-[0.625rem] w-[9.875rem]">
+            <button className="z-1 relative flex items-center justify-center gap-[0.625rem] w-[9.875rem]">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                 <g clip-path="url(#clip0_4297_18817)">
                   <path d="M12.6227 7.53864C12.4636 7.53866 12.311 7.60188 12.1985 7.71439C12.086 7.8269 12.0228 7.97949 12.0227 8.13861V11.1781C12.0227 12.0593 11.4683 12.8586 10.6431 13.1667C10.4056 13.2551 10.1543 13.3003 9.90088 13.2999H3.82189C2.652 13.2999 1.70002 12.3479 1.70002 11.1781V5.09915C1.70002 3.92926 2.652 2.97728 3.82189 2.97728H6.86134C7.01876 2.97471 7.16887 2.91036 7.27928 2.79813C7.38969 2.68589 7.45157 2.53475 7.45157 2.37731C7.45157 2.21987 7.38969 2.06874 7.27928 1.9565C7.16887 1.84426 7.01876 1.77992 6.86134 1.77734H3.82189C1.99024 1.77726 0.5 3.2675 0.5 5.09915V11.1781C0.5 13.0097 1.99024 14.4999 3.82189 14.4999H9.9008C10.2974 14.5004 10.6909 14.4296 11.0625 14.291C12.3545 13.8085 13.2227 12.5577 13.2227 11.1781V8.13861C13.2227 7.97949 13.1594 7.8269 13.0469 7.71439C12.9344 7.60188 12.7818 7.53866 12.6227 7.53864Z" fill="white" />
@@ -41,7 +41,7 @@ const Header = () => {
                 </defs>
               </svg>
               <span className="text-[#F7F6F1] font-Inter text-[0.75rem] not-italic font-medium leading-[1.125rem]">TIN DOANH NGHIỆP</span>
-            </div>
+            </button>
             <div className="flex h-[2.0625rem] justify-center items-center shrink-0">
               <Swiper
                 className="h-[1.0625rem] w-full"
@@ -73,23 +73,23 @@ const Header = () => {
           </div>
           {/* Header-right */}
           <div className="flex w-[27.875rem] justify-between items-center">
-            <div className="flex items-center gap-[0.625rem]">
+            <button className="flex items-center gap-[0.625rem]">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                 <path d="M5.33333 6.50004H8M5.33333 9.16671H10.6667M5.33333 11.8334H10.6667M10.6663 1.83337V3.83337M5.33301 1.83337V3.83337M4.66667 2.83337H11.3333C12.8061 2.83337 14 4.02728 14 5.50004V12.5C14 13.9728 12.8061 15.1667 11.3333 15.1667H4.66667C3.19391 15.1667 2 13.9728 2 12.5V5.50004C2 4.02728 3.19391 2.83337 4.66667 2.83337Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
               <p className="text-white font-Inter text-[0.75rem] not-italic font-medium leading-[1.125rem] tracking-[-0.0075rem]">
                 SỰ KIỆN
               </p>
-            </div>
-            <div className="flex items-center gap-[0.625rem]">
+            </button>
+            <button className="flex items-center gap-[0.625rem]">
               <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                 <path d="M2.66602 15.1667V9.83337M2.66602 9.83337V2.50004M2.66602 9.83337H5.33268M2.66602 2.50004V1.83337M2.66602 2.50004H10.666C11.4024 2.50004 11.9993 3.09699 11.9993 3.83337V5.16671M11.9993 5.16671H13.3327C14.0691 5.16671 14.666 5.76366 14.666 6.50004V11.8334C14.666 12.5698 14.0691 13.1667 13.3327 13.1667H6.66602C5.92964 13.1667 5.33268 12.5698 5.33268 11.8334V9.83337M11.9993 5.16671V8.50004C11.9993 9.23642 11.4024 9.83337 10.666 9.83337H5.33268" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
               <p className="text-white font-Inter text-[0.75rem] not-italic font-medium leading-[1.125rem] tracking-[-0.0075rem]">
                 TIN ĐỊNH CƯ
               </p>
-            </div>
-            <div className="flex items-center gap-[0.625rem]">
+            </button>
+            <button className="flex items-center gap-[0.625rem]">
               <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                 <rect x="1.66797" y="2.5" width="13.3333" height="12" rx="2" stroke="white" />
                 <path d="M1.66797 5.16663L5.83586 8.50094C7.29673 9.66964 9.37254 9.66963 10.8334 8.50094L15.0013 5.16663" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
@@ -97,7 +97,7 @@ const Header = () => {
               <p className="text-white font-Inter text-[0.75rem] not-italic font-medium leading-[1.125rem] tracking-[-0.0075rem]">
                 LIÊN HỆ
               </p>
-            </div>
+            </button>
             <DropdownMenu>
               <DropdownMenuTrigger className="flex w-[4.3125rem] h-[1.5625rem] flex-col items-start gap-[0.5rem] shrink-0">
                 <div className="flex py-[0.1875rem] items-center gap-[0.625rem] self-stretch rounded-[2rem]">

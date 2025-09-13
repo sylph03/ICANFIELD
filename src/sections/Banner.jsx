@@ -6,13 +6,13 @@ const Banner = () => {
 
       {/* Breadcrumb */}
       <div className="max-sm:hidden z-1 relative flex px-[5rem] py-[1.5rem] items-center gap-[0.5rem]">
-        <p className="text-[rgba(255,255,255,0.80)] font-Inter text-[0.875rem] not-italic font-medium leading-[1.3125rem] tracking-[-0.0175rem]">
+        <button className="text-[rgba(255,255,255,0.80)] font-Inter text-[0.875rem] not-italic font-medium leading-[1.3125rem] tracking-[-0.0175rem]">
           Trang chủ
-        </p>
+        </button>
         <div className="w-[0.3125rem] h-[0.3125rem] shrink-0 rounded-[6.25rem] opacity-[0.6] bg-white"></div>
-        <p className="text-white font-Inter text-[0.875rem] not-italic font-medium leading-[1.3125rem] tracking-[-0.0175rem]">
+        <button className="text-white font-Inter text-[0.875rem] not-italic font-medium leading-[1.3125rem] tracking-[-0.0175rem]">
           Tin tức
-        </p>
+        </button>
       </div>
       {/* Banner content */}
       <div className="max-sm:px-[1rem] max-sm:pt-[3.94rem] z-1 relative px-[5rem] inline-flex pr-[1rem] flex-col items-start gap-[1rem]">

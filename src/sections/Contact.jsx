@@ -11,7 +11,7 @@ const Contact = () => {
   const onSubmit = (data) => {
     console.log("Form submitted:", data)
     alert("Form submitted!")
-    reset
+    reset()
   };
   return (
     <>
