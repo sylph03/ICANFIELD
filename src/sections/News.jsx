@@ -12,17 +12,17 @@ import { motion, AnimatePresence } from "framer-motion"
 const featuredNews = [
   {
     id: 1,
-    img: '/bg-featurednews.png',
-    text: 'Khám phá các quốc gia có chính sách định cư tay nghề tốt nhất, cơ hội phát triển sự nghiệp.'
-  },
-  {
-    id: 2,
     img: '/bg-featurednews-1.jpg',
     text: 'Khám phá các quốc gia có chính sách định cư tay nghề tốt nhất, cơ hội phát triển sự nghiệp.'
   },
   {
-    id: 3,
+    id: 2,
     img: '/bg-featurednews.png',
+    text: 'Khám phá các quốc gia có chính sách định cư tay nghề tốt nhất, cơ hội phát triển sự nghiệp.'
+  },
+  {
+    id: 3,
+    img: '/bg-featurednews-1.jpg',
     text: 'Cập nhật chính sách du học Úc dành cho sinh viên quốc tế năm 2024'
   }
 ]
@@ -278,7 +278,7 @@ const News = () => {
                 <img className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 ease-in-out group-hover:scale-110 rounded-[1rem]" src={item.image} />
                 <div className="relative z-1 w-full h-full rounded-[1rem] flex p-[2rem] max-sm:p-[1.5rem] flex-col justify-between items-start flex-grow flex-shrink-0 basis-0 self-stretch bg-[linear-gradient(180deg,rgba(0,0,0,0.00)22.87%,rgba(0,0,0,0.57)63.62%,rgba(0,0,0,0.84)89.8%)]">
 
-                  <div className="max-sm:opacity-0 flex justify-end items-start self-stretch">
+                  <button className="max-sm:opacity-0 flex justify-end items-start self-stretch">
                     <div initial="rest" whileHover="hover" className="flex p-[0.625rem] gap-[0.625rem] shrink-0 rounded-[0.9375rem] bg-white">
                       <span className="hidden group-hover:flex transition-all duration-500 pl-[0.625rem] flex-grow flex-shrink-0 basis-0 text-[#3F2214] font-Inter text-[0.875rem] not-italic font-semibold leading-[1.3125rem]">
                         Xem thêm
@@ -287,7 +287,7 @@ const News = () => {
                         <path d="M7.04928 16.9497L16.9488 7.05025M16.9488 7.05025H8.46349M16.9488 7.05025V15.5355" stroke="#3F2214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
                     </div>
-                  </div>
+                  </button>
 
                   <div className="flex w-[24.75rem] max-sm:w-auto flex-col items-start gap-[0.6875rem] max-sm:gap-[0.75rem]">
                     <div className="px-[0.75rem] max-sm:px-[0.628rem] py-[0.375rem] max-sm:py-[0.314rem] rounded-[0.375rem] max-sm:rounded-[0.314rem] bg-[rgba(248,244,241,0.48)] backdrop-blur-[15px] max-sm:backdrop-blur-[12px] text-white font-Inter text-[0.75rem] max-sm:text-[0.625rem] not-italic font-bold leading-[1.125rem] max-sm:leading-[0.9375rem] uppercase">
