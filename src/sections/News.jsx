@@ -97,6 +97,8 @@ const News = () => {
           <h1 className="text-[#3F2214] font-Optima text-[3rem] max-sm:text-[1.5rem] not-italic font-semibold leading-[3.6rem] max-sm:leading-[1.95rem] tracking-[-0.06rem] max-sm:tracking-[-0.045rem]">
             Tin tức khác
           </h1>
+
+          {/* list tab */}
           <div ref={containerTabRef} className="flex justify-between items-center max-sm:flex-col max-sm:gap-[0.75rem] self-stretch overflow-hidden">
             <div ref={contentTabRef} className="flex items-center gap-[1.9375rem]">
               {tabs.map((tab, index) => (
@@ -157,7 +159,7 @@ const News = () => {
                       <span className="absolute top-1/2 -translate-y-1/2 right-[3rem] opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 text-center whitespace-nowrap pl-[0.625rem] flex-grow flex-shrink-0 basis-0 text-[#3F2214] font-Inter text-[0.875rem] not-italic font-semibold leading-[1.3125rem]">
                         Xem thêm
                       </span>
-                      <div className="w-6 group-hover:w-[7.5rem] flex justify-end items-center transition-all duration-500 ease-in-out">
+                      <div className="w-[24px] group-hover:w-[7.5rem] flex justify-end items-center transition-all duration-500 ease-in-out">
                         <svg className="group-hover:rotate-45 transition-all duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                           <path d="M7.04928 16.9497L16.9488 7.05025M16.9488 7.05025H8.46349M16.9488 7.05025V15.5355" stroke="#3F2214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
