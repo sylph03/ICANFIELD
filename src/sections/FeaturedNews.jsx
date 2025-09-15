@@ -52,7 +52,7 @@ const FeaturedNew = () => {
       if (swiperRef.current) {
         swiperRef.current.slideTo(nextIndex)
       }
-    }, 6000)
+    }, 10000)
 
     return () => clearInterval(intervalId)
   }, [newsActive])
@@ -99,7 +99,7 @@ const FeaturedNew = () => {
           key={newsActive}
           initial={{ width: "0%" }}
           animate={{ width: "100%" }}
-          transition={{ duration: 6, ease: "linear" }}
+          transition={{ duration: 10, ease: "linear" }}
           className="absolute w-full h-[0.8125rem] bottom-0 right-0 left-0 rounded-b-[1rem] bg-[linear-gradient(98deg,#B56641_41.26%,#F5C178_97.06%)]">
         </motion.div>
 
@@ -214,7 +214,7 @@ const FeaturedNew = () => {
                 key={newsActive}
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
-                transition={{ duration: 6, ease: "linear" }}
+                transition={{ duration: 10, ease: "linear" }}
                 className="absolute w-full h-[0.44rem] bottom-0 right-0 left-0 rounded-b-[1rem] bg-[linear-gradient(98deg,#B56641_41.26%,#F5C178_97.06%)]">
               </motion.div>
 

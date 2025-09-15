@@ -34,10 +34,25 @@ const Contact = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: imgRef.current,
-          start: "top center",
+          start: "top 40%",
           toggleActions: "play none none none",
         },
       }
+    )
+
+    gsap.fromTo(
+      ".imgChild", 
+      { x: -100, opacity: 0 },
+      {
+      x: 0,
+      opacity: 1,
+      duration: 1.25,
+      scrollTrigger: {
+        trigger: imgRef.current,
+        start: "top 40%",
+        toggleActions: "play none none none",
+      },
+    }
     )
   }, [])
 
@@ -68,10 +83,10 @@ const Contact = () => {
         <img className="max-sm:hidden absolute w-full h-[68.68763rem] top-[-13.06rem]" src="/bg-connect-towel.png" />
         {/* Bird */}
         <img className="max-sm:hidden absolute h-[12.56263rem] top-[28.06rem] left-[36.88rem]" src="/bg-connect-bird.png" />
-        <img className="opacity-0 max-sm:hidden absolute h-[12.56263rem] top-[20.06rem] left-[37.88rem]" src="/bg-connect-bird.png" />
+        <img className="imgChild z-2 max-sm:hidden absolute h-[12.56263rem] top-[20.06rem] left-[37.88rem]" src="/bg-connect-bird.png" />
         {/* Plant */}
         <img className="absolute h-[5.79794rem] max-sm:h-[1.65031rem] top-[7.75rem] max-sm:top-[23.06rem] left-[27.06rem] max-sm:left-[6.75rem]" src="/bg-connect-plant.png" />
-        <img className="opacity-0 absolute h-[5.79794rem] max-sm:h-[1.65031rem] top-[0.5rem] max-sm:top-[23.06rem] left-[30.06rem] max-sm:left-[6.75rem]" src="/bg-connect-plant.png" />
+        <img className="imgChild z-2 absolute h-[5.79794rem] max-sm:h-[1.65031rem] top-[0.5rem] max-sm:top-[23.06rem] left-[30.06rem] max-sm:left-[6.75rem]" src="/bg-connect-plant.png" />
         {/* Combo */}
         <img ref={imgRef} className="max-sm:hidden z-1 absolute w-[64.45769rem] max-sm:w-[26.36831rem] h-[71.75rem] max-sm:h-[20.49275rem] top-[-5.81rem] max-sm:top-[20.72rem] left-[2rem] max-sm:left-0" src="/bg-connect-combo.png" />
         <img className="hidden max-sm:block z-1 absolute w-[64.45769rem] max-sm:w-[26.36831rem] h-[71.75rem] max-sm:h-[24.49275rem] top-[-5.81rem] max-sm:top-[20.72rem] left-[2rem] max-sm:left-0" src="/bg-connect-combo-mb.png" />
