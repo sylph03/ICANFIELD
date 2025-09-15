@@ -8,6 +8,10 @@ import { useState, useRef, useEffect } from "react"
 import Pagination from "@/components/pagination"
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion"
+import { gsap } from 'gsap'
+import { Draggable } from 'gsap/Draggable'
+import { InertiaPlugin } from 'gsap/InertiaPlugin'
+import useIsMobile from "@/hook/useMobile"
 
 const featuredNews = [
   {
@@ -68,12 +72,34 @@ const otherNews = [
 ]
 
 const repeatedNews = Array.from({ length: 10 }).flatMap(() => otherNews);
+gsap.registerPlugin(Draggable, InertiaPlugin)
 
 const News = () => {
   const [newsActive, setNewsActive] = useState(0)
   const [activeTab, setActiveTab] = useState(0);
   const [itemHeight, setItemHeight] = useState(0)
   const itemRef = useRef(null)
+
+  const isMobile = useIsMobile()
+  const containerTabRef = useRef(null)
+  const contentTabRef = useRef(null)
+
+
+  useEffect(() => {
+    if (!containerTabRef.current || !contentTabRef.current || !isMobile) return
+
+    const draggable = Draggable.create(contentTabRef.current, {
+      type: 'x',
+      bounds: containerTabRef.current,
+      inertia: true,
+      cursor: 'grab',
+      activeCursor: 'grabbing',
+    })
+
+    return () => {
+      draggable[0].kill()
+    }
+  }, [isMobile])
 
   const [page, setPage] = useState(1)
   const itemsPerPage = 9
@@ -228,12 +254,12 @@ const News = () => {
           <h1 className="text-[#3F2214] font-Optima text-[3rem] max-sm:text-[1.5rem] not-italic font-semibold leading-[3.6rem] max-sm:leading-[1.95rem] tracking-[-0.06rem] max-sm:tracking-[-0.045rem]">
             Tin tức khác
           </h1>
-          <div className="flex justify-between items-center max-sm:flex-col max-sm:gap-[0.75rem] self-stretch">
-            <div className="flex items-center gap-[1.9375rem]">
+          <div ref={containerTabRef} className="flex justify-between items-center max-sm:flex-col max-sm:gap-[0.75rem] self-stretch overflow-hidden">
+            <div ref={contentTabRef} className="flex items-center gap-[1.9375rem]">
               {tabs.map((tab, index) => (
                 <div key={index}
                   onClick={() => setActiveTab(index)}
-                  className={`cursor-pointer py-[0.5rem] border-b ${activeTab === index ? 'border-[#95502F] text-[#95502F]' : 'border-transparent text-[rgba(0,0,0,0.60)]'} font-Inter text-[1rem] not-italic font-medium leading-[1.5rem] tracking-[-0.02rem]`}>
+                  className={`whitespace-nowrap cursor-pointer py-[0.5rem] border-b ${activeTab === index ? 'border-[#95502F] text-[#95502F]' : 'border-transparent text-[rgba(0,0,0,0.60)]'} font-Inter text-[1rem] not-italic font-medium leading-[1.5rem] tracking-[-0.02rem]`}>
                   {tab}
                 </div>
               ))}
