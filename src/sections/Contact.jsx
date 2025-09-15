@@ -42,10 +42,14 @@ const Contact = () => {
 
     gsap.fromTo(
       ".imgChild", 
-      { x: -100, opacity: 0 },
+      { x: -100, 
+        opacity: 0,
+        yPercent: 45,
+      },
       {
       x: 0,
       opacity: 1,
+      yPercent: 0,
       duration: 1.25,
       scrollTrigger: {
         trigger: imgRef.current,
