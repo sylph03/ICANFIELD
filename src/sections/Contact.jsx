@@ -164,9 +164,9 @@ const Contact = () => {
           </form>
         </div>
 
-        {/*  */}
+        {/* slogan */}
         <div className="absolute left-[9.81rem] max-sm:left-0 max-sm:px-[1rem] max-sm:pt-[1.5rem] max-sm:pb-[2rem] bottom-[9.31rem] max-sm:bottom-0 z-5 flex max-sm:flex-col items-start gap-[15.3125rem] max-sm:gap-[2.5rem] shrink-0">
-          <img className="fade-in-contact max-sm:w-[18.4375rem] max-sm:h-[4.875rem] max-sm:pl-[2.5rem]" src="/connect-logo.png" />
+          <img className="fade-in-contact w-[35.6rem] h-[10.625rem] max-sm:w-[18.4375rem] max-sm:h-[4.875rem] max-sm:pl-[2.5rem]" src="/connect-logo.png" />
           <div className="fade-in-contact w-[37.8125rem] max-sm:w-full flex flex-col">
             <span className="text-[#5C321E] font-Optima text-[2rem] max-sm:text-[1.25rem] not-italic font-semibold leading-[2.6rem] max-sm:leading-[1.625rem] tracking-[-0.08rem] max-sm:tracking[-0.05rem]">
               Cuộc sống là một hành trình, và mỗi bước đi đúng đắn hôm nay sẽ mở ra cánh cửa cho một tương lai tươi sáng và tràn đầy hy vọng.
