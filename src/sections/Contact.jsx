@@ -53,7 +53,7 @@ const Contact = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: '.fade-in-contact',
-          start: "top 80%",
+          start: "top bottom",
         },
       }
     )
