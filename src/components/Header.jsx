@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css";
 import { Autoplay } from "swiper/modules"
 import { useState } from "react"
+import Navbar from "@/sections/Navbar"
 
 const textTitle = [
   'Tối ưu công năng sử dụng trong căn hộ ở Ecopark',
@@ -21,7 +22,7 @@ const Header = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <>
+    <div className="sticky top-0 z-49">
       <div className="max-sm:hidden w-full h-[2.0625rem] shrink-0 bg-[linear-gradient(118deg,#2E1506_69.75%,#95502F_142.7%,#F5C178_182.76%)] px-[5rem]">
         <div className="flex justify-between items-center">
           {/* Header-left */}
@@ -126,7 +127,7 @@ const Header = () => {
       </div>
 
       {/* mb */}
-      <div className="hidden max-sm:flex px-[1rem] py-[0.75rem] justify-between items-center self-stretch text-white shadow-[0_4px_20px_0_rgba(0,0,0,0.19)]">
+      <div className="bg-white hidden max-sm:flex px-[1rem] py-[0.75rem] justify-between items-center self-stretch text-white shadow-[0_4px_20px_0_rgba(0,0,0,0.19)]">
         <img className="w-[6.25244rem] h-[2.25rem]" src="/logo-real.png" />
 
         <div className="flex items-center gap-[1.5rem]">
@@ -169,7 +170,10 @@ const Header = () => {
         </div>
 
       </div>
-    </>
+
+      {/* Navbar */}
+      <Navbar />
+    </div>
   )
 }
 
