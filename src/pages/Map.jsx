@@ -52,7 +52,7 @@ const flagCountry = [
     name: "New Zealeand",
     geoName: "New Zealand",
     imgFlag: "/flag-country/new-zealand-flag.png",
-    position: [-41.2865, 174.7762],
+    position: [-41.2865, 172.7762],
     showNav: true
   },
   {
@@ -88,7 +88,7 @@ const customMarker = (flagCountry, name) => {
     className: "",
     html,
     iconSize: [96, 52.58],
-    iconAnchor: [48, 52.58],
+    iconAnchor: [24, 52.58],
   });
 };
 
