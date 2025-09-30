@@ -132,11 +132,11 @@ const ZoomableMarker = ({ fc, selected, setSelected, setActive }) => {
     if (!fc.showNav) return
     if (selected === fc.geoName) {
       // nếu click lại marker đang chọn → reset
-      map.flyTo(defaultCenter, defaultZoom, { durationFlyTo });
+      map.flyTo(defaultCenter, defaultZoom, { duration: durationFlyTo });
       setSelected(null);
     } else {
       // zoom + center vào marker
-      map.flyTo(fc.position, flyTo, { durationFlyTo });
+      map.flyTo(fc.position, flyTo, { duration: durationFlyTo });
       setSelected(fc.geoName);
       setActive(fc.geoName)
     }
@@ -158,7 +158,7 @@ function FlyToMarker({ active, flagCountry }) {
     if (!active) return;
     const country = flagCountry.find(fc => fc.geoName === active);
     if (country?.position) {
-      map.flyTo(country.position, flyTo, { durationFlyTo });
+      map.flyTo(country.position, flyTo, { duration: durationFlyTo });
     }
   }, [active, flagCountry, map]);
 
