@@ -1,6 +1,10 @@
 import { MapContainer, Marker, GeoJSON, useMap, ZoomControl } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import L from "leaflet"
+import MarkerClusterGroup from "react-leaflet-cluster"
+// import css để cluster có style
+import "react-leaflet-cluster/dist/assets/MarkerCluster.css"
+import "react-leaflet-cluster/dist/assets/MarkerCluster.Default.css"
 import countries from "../data/custom.geo.json"
 import { useState, useEffect, useRef } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -18,14 +22,14 @@ const flagCountry = [
     name: "Hoàng Sa",
     geoName: "Vietnam",
     imgFlag: "/flag-country/vietnam.png",
-    position: [16.5, 112.0],
+    position: [16.668856, 112.729182],
     showNav: false
   },
   {
     name: "Trường Sa",
     geoName: "Vietnam",
     imgFlag: "/flag-country/vietnam.png",
-    position: [8.641, 111.918],
+    position: [10.740398, 115.835234],
     showNav: false
   }, {
     name: "Canada",
@@ -92,9 +96,33 @@ const customMarker = (flagCountry, name) => {
   });
 };
 
+const createClusterCustomIcon = (cluster) => {
+  return L.divIcon({
+    html: `
+      <div class="custom-cluster">
+        <div>
+          <span>${cluster.getChildCount()}</span>
+        </div>
+      </div>
+    `,
+    className: "custom-marker-cluster",
+    iconSize: L.point(40, 40, true),
+  });
+};
+
+const polygonOptions = {
+  color: "rgba(150, 110, 40, 0.8)",   // viền
+  weight: 2,                          // độ dày viền
+  opacity: 1,
+  fillColor: "rgba(188, 146, 71, 0.3)", // nền bên trong
+  fillOpacity: 0.4
+};
+
 // center mặc định
 const defaultCenter = [20, 0];
 const defaultZoom = 2;
+const flyTo = 3.5
+const durationFlyTo = 0.75
 
 // Component cho Marker với logic zoom
 const ZoomableMarker = ({ fc, selected, setSelected, setActive }) => {
@@ -104,11 +132,11 @@ const ZoomableMarker = ({ fc, selected, setSelected, setActive }) => {
     if (!fc.showNav) return
     if (selected === fc.geoName) {
       // nếu click lại marker đang chọn → reset
-      map.flyTo(defaultCenter, defaultZoom, { duration: 0.75 });
+      map.flyTo(defaultCenter, defaultZoom, { durationFlyTo });
       setSelected(null);
     } else {
       // zoom + center vào marker
-      map.flyTo(fc.position, 3, { duration: 0.75 });
+      map.flyTo(fc.position, flyTo, { durationFlyTo });
       setSelected(fc.geoName);
       setActive(fc.geoName)
     }
@@ -130,7 +158,7 @@ function FlyToMarker({ active, flagCountry }) {
     if (!active) return;
     const country = flagCountry.find(fc => fc.geoName === active);
     if (country?.position) {
-      map.flyTo(country.position, 3, { duration: 0.75 });
+      map.flyTo(country.position, flyTo, { durationFlyTo });
     }
   }, [active, flagCountry, map]);
 
@@ -294,6 +322,7 @@ const Map = () => {
         <MapContainer
           center={defaultCenter}
           zoom={defaultZoom}
+          maxZoom={18}
           zoomDelta={0.5}
           zoomSnap={0.5}
           maxBoundsViscosity={1.0}
@@ -314,15 +343,21 @@ const Map = () => {
           />
 
           {/* Marker */}
-          {flagCountry.map((fc, i) => (
-            <ZoomableMarker
-              key={i}
-              fc={fc}
-              selected={selected}
-              setSelected={setSelected}
-              setActive={setActive}
-            />
-          ))}
+          <MarkerClusterGroup
+            chunkedLoading
+            iconCreateFunction={createClusterCustomIcon}
+            polygonOptions={polygonOptions}
+          >
+            {flagCountry.map((fc, i) => (
+              <ZoomableMarker
+                key={i}
+                fc={fc}
+                selected={selected}
+                setSelected={setSelected}
+                setActive={setActive}
+              />
+            ))}
+          </MarkerClusterGroup>
 
           {/* Tự động zoom khi click flag */}
           <FlyToMarker active={active} flagCountry={flagCountry} />
